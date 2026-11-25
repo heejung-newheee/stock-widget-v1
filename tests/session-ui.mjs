@@ -3831,11 +3831,14 @@ await test('market panel: the 10y-2y spread, the dollar index and a commodities 
   h.run("quotes['DX-Y.NYB'] = { price: 99.5, change: 0.3, pct: 0.3, daily: { times: [1, 2, 3, 4, 5, 6], closes: [98, 98.5, 99, 99.2, 99.2, 99.5] } };");
   const html = h.c.marketHtml();
   const keys = [...html.matchAll(/data-key="([^"]+)"/g)].map((m) => m[1]);
-  assert.deepEqual(keys.slice(keys.indexOf('VIX')), ['VIX', 'FEARGREED', 'US10Y', 'CURVE', 'HYOAS', 'USDKRW', 'JPYKRW', 'DXY', 'WTI', 'BRENT', 'GOLD', 'COPPER']);
+  assert.deepEqual(keys.slice(keys.indexOf('VIX')), ['VIX', 'FEARGREED', 'US10Y', 'CURVE', 'HYOAS', 'USDKRW', 'JPYKRW', 'EURKRW', 'DXY', 'WTI', 'BRENT', 'GOLD', 'COPPER']);
   // 원/엔(2026-11-12 사용자 요청) — 달러 인덱스처럼 야후 값 · 차트만, 100엔당 원(main 이 곱해 준다 — tests/chart-fill.mjs)
   assert.ok(h.run("INDICES.some((i) => i.symbol === 'JPYKRW=X' && i.code === 'JPYKRW' && i.name === '원/엔(100엔)' && i.overseas && i.page === undefined)"),
     '지수 줄(page)에는 없다 — 시장 지표 화면에만');
   assert.match(h.run('MARKET_DESC.JPYKRW'), /^원\/엔 — 100엔에 원화 몇 원\n/);
+  // 원/유로(2026-11-24 사용자 요청) — 같은 야후 경로, 1유로당이라 곱하지 않는다
+  assert.ok(h.run("INDICES.some((i) => i.symbol === 'EURKRW=X' && i.code === 'EURKRW' && i.name === '원/유로' && i.overseas && i.page === undefined)"));
+  assert.match(h.run('MARKET_DESC.EURKRW'), /^원\/유로 — 1유로에 원화 몇 원\n/);
   assert.match(html, /class="qhint rnote mgroup">원자재</);
   assert.match(html, /data-sym="\^T10Y2Y" data-key="CURVE"/, '누르면 차트');
   const curve = keyRow(html, 'CURVE');
