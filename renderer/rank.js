@@ -346,6 +346,10 @@ function marketHtml() {
     .map(([label, v]) => (listOf(v) ? `${label}: ${listOf(v)}\n` : '')).join('');
   return `<div class="qhint msum" title="${esc(`${tip}\n경험칙을 숫자로 옮긴 참고용이다 — 매매 판단을 대신하지 않는다\n\n${DEADCAT_EVIDENCE}`)}">데드캣 점검 · 긍정 ${count('good')}`
     + ` · 중립 ${count('neutral')} · 위험 ${count('risk')} (참고용)${judged < checks.length ? ` · 판정 ${judged}/${checks.length}` : ''}</div>`
+    // 칸 이름 줄(2026-11-24 사용자 요청 — 값 · 등락 · 미니 선이 무엇인지 알 수 없었다). 줄과 같은 칸 클래스라 열이 맞는다
+    + '<div class="rrow mrow mfix mhead"><span class="mdsp"></span><span class="hname"></span><span class="mval">현재가</span>'
+    + '<span class="rpct" title="전일 종가 대비">오늘</span><span class="md5" title="5거래일 전 종가 대비">5일</span>'
+    + '<span class="mspark" title="최근 20거래일 종가">20일</span></div>'
     + out.join('');
 }
 

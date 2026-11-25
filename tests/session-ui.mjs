@@ -3839,6 +3839,8 @@ await test('market panel: the 10y-2y spread, the dollar index and a commodities 
   // 원/유로(2026-11-24 사용자 요청) — 같은 야후 경로, 1유로당이라 곱하지 않는다
   assert.ok(h.run("INDICES.some((i) => i.symbol === 'EURKRW=X' && i.code === 'EURKRW' && i.name === '원/유로' && i.overseas && i.page === undefined)"));
   assert.match(h.run('MARKET_DESC.EURKRW'), /^원\/유로 — 1유로에 원화 몇 원\n/);
+  // 칸 이름 줄(2026-11-24 사용자 요청) — 요약 바로 아래, 첫 묶음 앞
+  assert.match(html, /<\/div><div class="rrow mrow mfix mhead">.*>현재가<.*>오늘<.*>5일<.*>20일<\/span><\/div><div class="qhint rnote mgroup">국내</);
   assert.match(html, /class="qhint rnote mgroup">원자재</);
   assert.match(html, /data-sym="\^T10Y2Y" data-key="CURVE"/, '누르면 차트');
   const curve = keyRow(html, 'CURVE');

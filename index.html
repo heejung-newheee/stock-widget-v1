@@ -439,6 +439,10 @@
   /* 데드캣 점검 — 요약 줄, 줄 앞 판정 점(초록 긍정 · 회색 중립 · 주황 위험 — 헤더의 실시간 · 지연과 같은 색, 테두리만 = 판정 불가),
      줄 끝 20일 미니 선 */
   .msum { padding: 6px 11px 2px; font-size: 10px; color: var(--text-3); }
+  /* 칸 이름 줄 — 값 줄과 같은 칸 너비, 글자만 작고 흐리게 */
+  .mrow.mhead { padding-top: 2px; padding-bottom: 0; }
+  .mrow.mhead > span { font-size: 9px; color: var(--mute); }
+  .mrow.mhead .mspark { text-align: right; }
   .mrow .mdot, .mrow .mdsp { flex: 0 0 6px; height: 6px; border-radius: 50%; align-self: center; }
   .mrow .mdot.good { background: #2fa15a; }
   .mrow .mdot.neutral { background: var(--mute); }
